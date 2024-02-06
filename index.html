@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaryan Kashyap</title>
+    <style>
+        @media only screen and (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav a {
+                margin: 5px 0;
+            }
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url(white.avif);
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        header {
+            background-color: #0000007d;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            display: none;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+        }
+
+        nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #707070e7;
+        }
+
+        .navbar-dropdown {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            background-color: #0000007d;
+            width: 100%;
+            top: 60px;
+            left: 0;
+            z-index: 999;
+        }
+
+        .navbar-dropdown a {
+            padding: 10px 20px;
+            margin: 0;
+            color: white;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .navbar-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .navbar-dropdown a:hover {
+            background-color: #707070e7;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar a {
+                display: none;
+            }
+
+            .navbar-logo {
+                display: block;
+            }
+
+            .navbar-dropdown {
+                display: flex;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            padding: 20px 20px 20px;
+            margin: 0;
+        }
+
+        section h2 {
+            margin-bottom: 10px;
+            font-size: 250%;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        #contact {
+            background-color: #eee;
+            text-align: center;
+            padding: 10px;
+            flex: 10;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 20px;
+            flex-grow: 1;
+        }
+
+        .contact-buttons img {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .contact-buttons img:hover {
+            transform: scale(1.1);
+        }
+
+        section#about {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: start;
+        }
+
+        section#about img {
+            align-self: flex-start;
+            border: #333;
+            border-radius: 10%;
+            margin-right: 20px;
+        }
+
+        #paragraph {
+            font-size: 125%;
+            text-align: justify;
+            font-style: normal;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+        section#education {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: start;
+        }
+
+        .section#education img {
+            align-self: flex-start;
+        }
+
+        .education-content img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #paragraph2 {
+            font-size: 125%;
+            text-align: justify;
+            font-style: normal;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+        .education-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .education-text {
+            text-align: justify;
+        }
+
+        .education-title {
+            text-align: center;
+            font-size: xx-large;
+            margin-bottom: 0;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .flex-box .education-content {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .arrow-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .arrow-list li {
+            margin-left: 20px;
+        }
+
+        .arrow-list li::before {
+            content: "➤";
+            color: #007BFF;
+            font-size: xx-large;
+            margin-right: 8px;
+        }
+
+        #skills {
+            padding: 20px;
+        }
+
+        .skill {
+            margin-bottom: 20px;
+        }
+
+        .skill p {
+            margin: 5px 0;
+        }
+
+        .skill-bar {
+            background-color: #eeeeee63;
+            height: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar {
+            height: 100%;
+            background-color: #ff110032;
+        }
+
+        .percentage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000000;
+        }
+
+        .navbar-dropdown.hidden {
+            display: none;
+        }
+
+        .switch-container {
+            margin-right: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .light-mode {
+            background-image: url('white.avif');
+            color: #000;
+        }
+
+        .light-mode header {
+            background-color: #fff;
+        }
+
+        .light-mode nav a {
+            color: #fff;
+        }
+
+        .dark-mode {
+            background-image: url('black.avif');
+            color: #fff;
+        }
+
+        .dark-mode header {
+            background-color: #000;
+        }
+
+        .dark-mode nav a {
+            color: #fff;
+        }
+
+        .blog-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .blog-tile {
+            width: calc(50% - 20px);
+            /* Two tiles per row */
+            margin-bottom: 20px;
+            /* Adjust margin between tiles */
+        }
+
+        .blog-tile .blog-image {
+            height: 200px;
+            /* Set a fixed height for all images */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .blog-tile .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            transition: 0.5s ease;
+        }
+
+        .blog-tile .overlay:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .blog-tile .overlay h3,
+        .blog-tile .overlay p {
+            margin: 0;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        .blog-tile .overlay p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes appearLetter {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .section-heading {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: appearLetter 3s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <nav>
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#achievements">Achievements</a>
+                <a href="#skills">Skills</a>
+                <a href="#blog">Blogs</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="switch-container">
+                <label class="switch">
+                    <input type="checkbox" onclick="toggleDarkMode()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="about">
+        <h2 class="section-heading">About Me</h2>
+    </section>
+
+    <section id="about">
+        <div class="flex-box"
+            style="background-color: rgba(128, 128, 128, 0.518); border: 2px solid rgba(0, 0, 0, 0.253); border-radius: 5%; padding: 10px; margin: 10px;">
+            <div id="paragraph">
+                <div class="about-content">
+                    <p style="font-size: larger;">Hey there! This is Aaryan Kashyap. A boy born and raised in New Delhi.
+                        As of today my age is
+                        already
+                        20 lol.
+                        Currently i am pursuing degree of <em>B.Tech in Computer Science and M.S. in Computational
+                            Linguistics</em>. I
+                        have many hobbies but nevermind i don't have time for them since i am a student at IIIT
+                        Hyderabad.
+                        Other
+                        than fighting over my life to complete assignments you can find me binging anime. I have a great
+                        interest in art and listening to music. I have a short family and an even shorter social circle.
+                        My favourite food includes food.
+                        I
+                        hope
+                        to achieve someday what i dream of, that i'm not writing here today. So this is it about myself,
+                        thanks for reading!</p>
+                </div>
+            </div>
+        </div>
+        <img src="aaryan.jpg" height="20%" width="20%">
+    </section>
+
+    <section id="about">
+        <p style="font-size: x-large;"><a href="Resume.pdf">Click Here</a>  to view my resume.</p>
+    </section>
+
+    <section id="education">
+        <h2 class="section-heading">My Educational Background</h2>
+    </section>
+
+    <section id="education" class="education-section">
+
+        <div class="flex-box animate">
+            <div class="education-content">
+                <div class="image-container">
+                    <img src="modern.png" height="40%" width="40%"><br>
+                </div>
+                <div id="paragraph2" class="education-text">
+                    <h3 class="education-title">2010-2020</h3>
+                    <p>Finished class 10th!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-box animate">
+            <div class="education-content">
+                <div class="image-container">
+                    <img src="catalyser.png" height="85%" width="85%"><br><br><br><br><br>
+                </div>
+                <div id="paragraph2" class="education-text">
+                    <h3 class="education-title">2020-2022</h3>
+                    <p>Finished high school!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-box animate">
+            <div class="education-content">
+                <div class="image-container">
+                    <img src="iiit.png" height="100%" width="100%">
+                </div>
+                <div id="paragraph2" class="education-text">
+                    <h3 class="education-title">2023-?</h3>
+                    <p>idk what I am doing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <h2 class="section-heading">My Achievements</h2>
+        <ul class="arrow-list animate">
+            <li>AIR-96: UGEE-2023.</li>
+            <li>96%: CBSE Class 10th-2020</li>
+            <li>86%: CBSE Class 12th-2022</li>
+        </ul>
+
+    </section>
+
+    <section id="skills">
+        <h2 class="section-heading">My Skills</h2>
+        <div class="skill">
+            <h3>C/C++</h3>
+            <div class="skill-bar">
+                <div class="bar" style="width: 50%;"></div>
+                <span class="percentage">50%</span>
+            </div>
+        </div>
+        <div class="skill">
+            <h3>HTML/CSS/JS</h3>
+            <div class="skill-bar">
+                <div class="bar" style="width: 25%;"></div>
+                <span class="percentage">25%</span>
+            </div>
+        </div>
+        <div class="skill">
+            <h3>Python</h3>
+            <div class="skill-bar">
+                <div class="bar" style="width: 10%;"></div>
+                <span class="percentage">10%</span>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="blog">
+        <h2 class="section-heading">My Blogs</h2>
+        <div class="blog-container">
+            <div class="blog-tile">
+                <a href="blog1.html" target="_blank">
+                    <div class="blog-image"
+                        style="background-image: url('https://i.ytimg.com/vi/6JzVw7YIFQo/maxresdefault.jpg');">
+                        <div class="overlay">
+                            <h3 style="text-align: center;">Gyomei vs Akaza</h3>
+                            <p>Why the stone pillar is much stronger than the upper rank 3...</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="blog-tile">
+                <a href="blog2.html" target="_blank">
+                    <div class="blog-image" style="background-image: url(gojo.jpg);">
+                        <div class="overlay">
+                            <h3>Gojo vs Sukuna</h3>
+                            <p>What is it like when the strongest collide?</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section id="contact">
+        <div class="contact-buttons">
+            <a href="https://github.com/aaryankashyap007"><img
+                    src="https://www.freepnglogos.com/uploads/512x512-logo-png/512x512-logo-github-icon-35.png"
+                    alt="Github"></a>
+            <a href="mailto:aaryan.kashyap@research.iiit.ac.in">
+                <img src="https://www.freepnglogos.com/uploads/envelope-png/mail-envelope-interface-icons-23.png"
+                    alt="Email">
+            </a>
+
+            <a href="https://www.instagram.com/aaryanforsure/"><img
+                    src="https://www.freepnglogos.com/uploads/logo-ig-png/logo-ig-instagram-new-logo-vector-download-5.png"
+                    alt="Instagram"></a>
+        </div>
+    </section>
+
+    <script>
+        function toggleNavbar() {
+            const navbarDropdown = document.querySelector('.navbar-dropdown');
+            navbarDropdown.classList.toggle('hidden');
+        }
+
+        window.addEventListener('resize', function () {
+            const navbarDropdown = document.querySelector('.navbar-dropdown');
+            const navLinks = document.querySelector('nav');
+
+            if (window.innerWidth > 600) {
+                navbarDropdown.classList.add('hidden');
+                navLinks.style.display = 'flex';
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            header.style.backgroundColor = window.scrollY > 0 ? '#0000007d' : 'transparent';
+        });
+
+        function toggleDarkMode() {
+            const body = document.body;
+            const switchToggle = document.querySelector('.switch-container input');
+
+            body.classList.toggle('light-mode');
+            body.classList.toggle('dark-mode');
+
+            if (body.classList.contains('dark-mode')) {
+                switchToggle.checked = true;
+            } else {
+                switchToggle.checked = false;
+            }
+        }
+
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        function handleScroll() {
+            const educationSection = document.getElementById('education');
+            const achievementsSection = document.getElementById('achievements');
+
+            const educationContent = document.querySelectorAll('.education-section .animate');
+            const achievementsContent = document.querySelectorAll('#achievements .animate');
+
+            if (isInViewport(educationSection)) {
+                educationContent.forEach(element => {
+                    element.classList.add('fadeIn');
+                });
+            }
+
+            if (isInViewport(achievementsSection)) {
+                achievementsContent.forEach(element => {
+                    element.classList.add('fadeIn');
+                });
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+
+        handleScroll();
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyomei vs Akaza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .blog-post {
+            max-width: 800px;
+            margin: auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .blog-post img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .blog-post h1 {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #333;
+        }
+        .blog-post p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+        }
+        .like-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .comment-box {
+            margin-top: 20px;
+        }
+        .comment-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+        .comment-list {
+            margin-top: 20px;
+        }
+        .comment {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-post">
+        <img src="gyomei.jpg" alt="Blog Image">
+        <h1>Gyomei Would Absolutely Destroy Akaza</h1>
+        <p>According to recent analysis, Gyomei Himejima from the anime Demon Slayer would likely emerge victorious in a battle against Akaza.</p>
+        <p>Based on power scaling, it is believed that Gyomei, when marked, is superior to Base Kokushibo, who in turn surpasses Base Gyomei. Therefore, it's reasoned that Marked Gyomei would possess greater strength and skill than Akaza.</p>
+        <p>Furthermore, it has been argued that Marked Sanemi, another powerful character in the series, ranks higher than Akaza in terms of combat ability.</p>
+        <p>While the outcome of such hypothetical battles can be subjective, this analysis suggests that Gyomei Himejima holds a significant advantage over Akaza.</p>
+        <button class="like-button" id="likeButton">Like</button>
+        <p id="likeCount">0 likes</p>
+
+        <div class="comment-box">
+            <textarea id="commentInput" class="comment-input" placeholder="Add your comment"></textarea>
+            <button id="submitComment" class="like-button">Submit Comment</button>
+        </div>
+
+        <div class="comment-list" id="commentList">
+            <!-- Comments will be added dynamically here -->
+        </div>
+    </div>
+
+    <script>
+        // Retrieve like count from localStorage, or default to 0 if not set
+        let likeCount = parseInt(localStorage.getItem('likeCount')) || 0;
+        let isLiked = localStorage.getItem('isLiked') === 'true' || false;
+        let comments = JSON.parse(localStorage.getItem('comments')) || [];
+
+        const likeButton = document.getElementById("likeButton");
+        const likeCountDisplay = document.getElementById("likeCount");
+        const commentInput = document.getElementById("commentInput");
+        const submitComment = document.getElementById("submitComment");
+        const commentList = document.getElementById("commentList");
+
+        likeCountDisplay.textContent = likeCount + (likeCount === 1 ? " like" : " likes");
+        likeButton.textContent = isLiked ? 'Unlike' : 'Like';
+
+        likeButton.addEventListener("click", function() {
+            if (!isLiked) {
+                likeCount++;
+                likeCountDisplay.textContent = likeCount + (likeCount === 1 ? " like" : " likes");
+                isLiked = true;
+                likeButton.textContent = "Unlike";
+            } else {
+                likeCount--;
+                likeCountDisplay.textContent = likeCount + (likeCount === 1 ? " like" : " likes");
+                isLiked = false;
+                likeButton.textContent = "Like";
+            }
+            localStorage.setItem('likeCount', likeCount);
+            localStorage.setItem('isLiked', isLiked);
+        });
+
+        submitComment.addEventListener("click", function() {
+            const commentText = commentInput.value.trim();
+            if (commentText !== "") {
+                comments.push(commentText);
+                renderComments();
+                localStorage.setItem('comments', JSON.stringify(comments));
+                commentInput.value = "";
+            }
+        });
+
+        function renderComments() {
+            commentList.innerHTML = "";
+            comments.forEach(function(comment) {
+                const commentElement = document.createElement("div");
+                commentElement.classList.add("comment");
+                commentElement.textContent = comment;
+                commentList.appendChild(commentElement);
+            });
+        }
+
+        renderComments();
+    </script>
+</body>
+</html>
